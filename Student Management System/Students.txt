@@ -1,0 +1,15 @@
+s001;Andreas Georgiou;1;72.5
+s020;Maria Ioannou;2;48.0
+s103;Eleni Papadopoulou;3;89.3
+s034;George Kyriakou;1;55.0
+s086;Antrew K;4;89.0
+s702;John McDonald;4;70.0
+s447;Antonis Giasoumi;3;77.0
+s021;Marios Iakovou;3;18.2
+s069;Giorkos Antreou;4;1.0
+s444;Noikodoimos Nikolaidis;1;34.6699
+s123;veronica lias;2;70.0
+
+s012;amorim aboubakar;1;100.0
+s200;Kathrin Jones;3;60.0
+s033;Ioakim Marathonodromou;1;50.0
