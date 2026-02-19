@@ -23,7 +23,7 @@ public class client {
     public static void main(String[] args) {
         try {
             //Socket socket = new Socket("192.168.10.121", 50); //laptop ip
-            Socket socket = new Socket("192.168.10.92", 50);
+            Socket socket = new Socket("192.168.10.32", 50); //desktop ip
             System.out.println("Established connection with the server.");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -42,6 +42,7 @@ public class client {
 
             int choice = 0;
             while (choice != 7) {
+                if(socket.isClosed()) continue;
                 // 1. Read menu
                 output(in);
                 // 2. Send choice

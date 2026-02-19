@@ -3,12 +3,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class server {
 
     private static volatile boolean socketRunning = false;
     private static ServerSocket serverSocketRef;
+    private static final List<Socket> connectedClients = new ArrayList<>();
 
     public static class Student {
         String id;
@@ -229,9 +232,9 @@ public class server {
             try {
                 int socketPort=50;
                 serverSocketRef = new ServerSocket(socketPort);
-                System.out.println("The server is listening on port "+socketPort);
                 while (socketRunning) {
                     Socket client = serverSocketRef.accept();
+                    connectedClients.add(client);
 
                     BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                     PrintWriter out = new PrintWriter(client.getOutputStream(), true);
@@ -242,9 +245,9 @@ public class server {
                     runMenu(in, out);
                     while (!(line = in.readLine()).isEmpty()) System.out.println(line);
 
+                    connectedClients.remove(client);
                     client.close();
                 }
-
             } catch (Exception ignored) {}
         }).start();
     }
@@ -253,8 +256,11 @@ public class server {
     public static void stopSocketServer() {
         socketRunning = false;
         try {
+            for (Socket s : connectedClients)
+                try {
+                    s.close();
+                } catch (Exception ignored) {}
             serverSocketRef.close();
-            System.out.println("The server is now offline");
         } catch (Exception ignored) {}
     }
 }
