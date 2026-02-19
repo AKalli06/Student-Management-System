@@ -42,7 +42,6 @@ public class client {
 
             int choice = 0;
             while (choice != 7) {
-                if(socket.isClosed()) continue;
                 // 1. Read menu
                 output(in);
                 // 2. Send choice
@@ -85,13 +84,14 @@ public class client {
                         out.println("Host name => "+localHost.getHostName());
                         out.println("IP address => "+localHost.getHostAddress());
                         out.println("");
+                        socket.close();
                         break;
                     default:
                         output(in);
                         break;
                 }
             }
-            socket.close();
+
         } catch (Exception e) {
             System.out.println("Unable to establish connection with the server");
         }
